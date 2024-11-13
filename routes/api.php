@@ -27,3 +27,14 @@ Route::prefix('students')->group(function () {
     Route::get('/', [RegistrationStudentController::class, 'index']);
     Route::delete('/{id}', [RegistrationStudentController::class, 'softDelete']);
 });
+
+use App\Http\Controllers\UserController;
+
+Route::prefix('admin')->group(function () {
+    Route::post('/create', [UserController::class, 'createUser']);
+    Route::get('/get-all-admin', [UserController::class, 'getAllUsers']);
+    Route::get('/get-admin/{id}', [UserController::class, 'getUser']);
+    Route::put('/update-admin{id}', [UserController::class, 'updateUser']);
+    Route::delete('/delete-admin{id}', [UserController::class, 'deleteUser']);
+    Route::post('/login', [UserController::class, 'login']);
+});
