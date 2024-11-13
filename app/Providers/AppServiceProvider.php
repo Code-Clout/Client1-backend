@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Interfaces\EnquiryRepositoryInterface;
+use App\Repositories\EnquiryRepository;
+use App\Repositories\RegistrationStudentRepository;
+use App\Repositories\Interfaces\RegistrationStudentRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +17,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            EnquiryRepositoryInterface::class,
+            EnquiryRepository::class
+            
+        );
+        $this->app->bind(RegistrationStudentRepositoryInterface::class, RegistrationStudentRepository::class);
     }
 
     /**
