@@ -59,15 +59,19 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:6'
         ]);
-
+    
         $user = $this->userRepository->findByEmail($request->email);
-
+    
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
-
+    
         $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json(['message' => 'Login successful', 'token' => $token]);
+        return response()->json([
+            'message' => 'Login successful',
+            'token' => $token,
+            'user' => $user 
+        ]);
     }
+    
 }
