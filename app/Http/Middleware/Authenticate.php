@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Closure; // Import the correct Closure class from the global namespace
+use Illuminate\Support\Facades\Auth;
 
 class Authenticate extends Middleware
 {
@@ -14,8 +16,27 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
+        if (!$request->expectsJson()) {
             return route('login');
         }
+    }
+
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  mixed  ...$guards
+     * @return mixed
+     */
+    public function handle($request, Closure $next, ...$guards)
+    {
+        \Log::info('Middleware triggered: ', ['route' => $request->path()]);
+        
+        if (Auth::guard('sanctum')->check()) {
+            return $next($request);
+        }
+        
+        return response()->json(['message' => 'Unauthenticated.'], 401);
     }
 }

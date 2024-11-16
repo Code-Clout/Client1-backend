@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -36,11 +37,13 @@ class UserController extends Controller
         return $user ? response()->json(['data' => $user]) : response()->json(['message' => 'User not found.'], 404);
     }
 
-    public function updateUser(UserRequest $request, int $id): JsonResponse
-    {
-        $user = $this->userRepository->update($id, $request->validated());
-        return $user ? response()->json(['message' => 'User updated successfully.', 'data' => $user])
-                     : response()->json(['message' => 'User not found.'], 404);
+    public function updateUser(UpdateUserRequest $request, int $id): JsonResponse
+    { 
+        $validatedData = $request->validated();
+        $user = $this->userRepository->update($id, $validatedData);
+        return $user
+            ? response()->json(['message' => 'User updated successfully.', 'data' => $user])
+            : response()->json(['message' => 'User not found.'], 404);
     }
 
     public function deleteUser(int $id): JsonResponse
