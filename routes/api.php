@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegistrationStudentController;
+use App\Http\Controllers\StudentTestimonialController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,9 +32,19 @@ Route::prefix('students')->group(function () {
 });
 
 Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
+    
+    //admin Apis
     Route::get('/get-all-admin', [UserController::class, 'getAllUsers']);
     Route::post('/create', [UserController::class, 'createUser']);
     Route::get('/get-admin/{id}', [UserController::class, 'getUser']);
     Route::put('/update-admin/{id}', [UserController::class, 'updateUser']);
     Route::delete('/delete-admin/{id}', [UserController::class, 'deleteUser']);
+
+    // student-testimonials
+    Route::get('/get-student-testimonials/{id}', [StudentTestimonialController::class, 'show']); 
+    Route::post('/create-student-testimonials', [StudentTestimonialController::class, 'store']);
+    Route::put('/update-student-testimonials/{id}', [StudentTestimonialController::class, 'update']); 
+    Route::delete('/delete-student-testimonials/{id}', [StudentTestimonialController::class, 'destroy']);
 });
+
+Route::get('/getAll-student-testimonials', [StudentTestimonialController::class, 'index']); 

@@ -3,12 +3,16 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\Interfaces\EnquiryRepositoryInterface;
-use App\Repositories\EnquiryRepository;
-use App\Repositories\RegistrationStudentRepository;
-use App\Repositories\Interfaces\RegistrationStudentRepositoryInterface;
+
 use App\Repositories\UserRepository;
+use App\Repositories\EnquiryRepository;
+use App\Repositories\StudentTestimonialRepository;
+use App\Repositories\RegistrationStudentRepository;
+use App\Repositories\Interfaces\EnquiryRepositoryInterface;
+use App\Repositories\Interfaces\RegistrationStudentRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Repositories\Interfaces\StudentTestimonialRepositoryInterface;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(EnquiryRepositoryInterface::class, EnquiryRepository::class);
         $this->app->bind(RegistrationStudentRepositoryInterface::class, RegistrationStudentRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(StudentTestimonialRepositoryInterface::class, StudentTestimonialRepository::class);
     }
 
     /**
