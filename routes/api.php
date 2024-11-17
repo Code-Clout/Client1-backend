@@ -6,24 +6,16 @@ use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegistrationStudentController;
 use App\Http\Controllers\StudentTestimonialController;
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Register API routes for your application here.
-|
-*/
+use App\Http\Controllers\AlumniSpeakController;
 
-// Authenticated user info
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 
 // Public Routes
 Route::post('/student-enquiries', [EnquiryController::class, 'createEnquiry']);
 Route::get('/get-all-enquiries', [EnquiryController::class, 'getAllEnquiries']);
 Route::post('/admin/login', [UserController::class, 'login']);
+Route::get('/getAll-student-testimonials', [StudentTestimonialController::class, 'index']); 
+Route::get('/getAll-alumni-speaks', [AlumniSpeakController::class, 'index']);
 
 Route::prefix('students')->group(function () {
     Route::post('/create', [RegistrationStudentController::class, 'create']);
@@ -45,6 +37,10 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::post('/create-student-testimonials', [StudentTestimonialController::class, 'store']);
     Route::put('/update-student-testimonials/{id}', [StudentTestimonialController::class, 'update']); 
     Route::delete('/delete-student-testimonials/{id}', [StudentTestimonialController::class, 'destroy']);
-});
 
-Route::get('/getAll-student-testimonials', [StudentTestimonialController::class, 'index']); 
+    // AlumniSpeak
+    Route::get('/get-alumni-speaks/{id}', [AlumniSpeakController::class, 'show']);
+    Route::post('/create-alumni-speaks', [AlumniSpeakController::class, 'store']);
+    Route::put('/update-alumni-speaks/{id}', [AlumniSpeakController::class, 'update']);
+    Route::delete('/delete-alumni-speaks/{id}', [AlumniSpeakController::class, 'destroy']);
+});
