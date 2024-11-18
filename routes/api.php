@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegistrationStudentController;
 use App\Http\Controllers\StudentTestimonialController;
 use App\Http\Controllers\AlumniSpeakController;
+use App\Http\Controllers\DescriptionController;
+use App\Http\Controllers\PlacedStudentController;
 
 
 
@@ -16,6 +18,7 @@ Route::get('/get-all-enquiries', [EnquiryController::class, 'getAllEnquiries']);
 Route::post('/admin/login', [UserController::class, 'login']);
 Route::get('/getAll-student-testimonials', [StudentTestimonialController::class, 'index']); 
 Route::get('/getAll-alumni-speaks', [AlumniSpeakController::class, 'index']);
+Route::get('/get-placed-students', [PlacedStudentController::class, 'index']);
 
 Route::prefix('students')->group(function () {
     Route::post('/create', [RegistrationStudentController::class, 'create']);
@@ -43,4 +46,10 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::post('/create-alumni-speaks', [AlumniSpeakController::class, 'store']);
     Route::put('/update-alumni-speaks/{id}', [AlumniSpeakController::class, 'update']);
     Route::delete('/delete-alumni-speaks/{id}', [AlumniSpeakController::class, 'destroy']);
+   
+    Route::get('/get-placed-students/{id}', [PlacedStudentController::class, 'show']);
+    Route::post('/create-placed-students', [PlacedStudentController::class, 'store']);
+    Route::put('/update-placed-students/{id}', [PlacedStudentController::class, 'update']);
+    Route::delete('/delete-placed-students/{id}', [PlacedStudentController::class, 'destroy']);
+    
 });
