@@ -9,6 +9,7 @@ use App\Http\Controllers\StudentTestimonialController;
 use App\Http\Controllers\AlumniSpeakController;
 use App\Http\Controllers\DescriptionController;
 use App\Http\Controllers\PlacedStudentController;
+use App\Http\Controllers\AnnouncementController;
 
 
 
@@ -19,6 +20,7 @@ Route::post('/admin/login', [UserController::class, 'login']);
 Route::get('/getAll-student-testimonials', [StudentTestimonialController::class, 'index']); 
 Route::get('/getAll-alumni-speaks', [AlumniSpeakController::class, 'index']);
 Route::get('/get-placed-students', [PlacedStudentController::class, 'index']);
+Route::get('/get-announcements', [AnnouncementController::class, 'index']);
 
 Route::prefix('students')->group(function () {
     Route::post('/create', [RegistrationStudentController::class, 'create']);
@@ -47,9 +49,16 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::put('/update-alumni-speaks/{id}', [AlumniSpeakController::class, 'update']);
     Route::delete('/delete-alumni-speaks/{id}', [AlumniSpeakController::class, 'destroy']);
    
+    // PlacedStudent
     Route::get('/get-placed-students/{id}', [PlacedStudentController::class, 'show']);
     Route::post('/create-placed-students', [PlacedStudentController::class, 'store']);
     Route::put('/update-placed-students/{id}', [PlacedStudentController::class, 'update']);
     Route::delete('/delete-placed-students/{id}', [PlacedStudentController::class, 'destroy']);
+
+    // Announcement
+    Route::get('/get-announcements/{id}', [AnnouncementController::class, 'show']);
+    Route::post('/create-announcements', [AnnouncementController::class, 'store']);
+    Route::put('/update-announcements/{id}', [AnnouncementController::class, 'update']);
+    Route::delete('/delete-announcements/{id}', [AnnouncementController::class, 'destroy']);
     
 });
