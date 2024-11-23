@@ -29,8 +29,7 @@ class RegistrationStudentRequest extends FormRequest
             'city' => 'nullable|string|max:255',
             'pin_code' => 'nullable|string|max:10',
             'reason' => 'nullable|string',
-            'agree_to_terms' => 'boolean',
-            'user_id' => 'required|exists:users,id',
+            'agree_to_terms' => 'boolean'
         ];
     }
 }
