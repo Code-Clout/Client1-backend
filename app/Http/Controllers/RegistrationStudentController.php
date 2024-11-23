@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegistrationStudentRequest;
 use App\Repositories\Interfaces\RegistrationStudentRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\StudentRegistrationConformationMail;
 
 class RegistrationStudentController extends Controller
 {
@@ -18,7 +20,17 @@ class RegistrationStudentController extends Controller
     public function create(RegistrationStudentRequest $request)
     {
         $student = $this->registrationStudentRepository->create($request->validated());
-        return response()->json(['message' => 'Student registered successfully', 'data' => $student], 201);
+        $firstName = $student->first_name;
+        $lastName = $student->last_name;
+        $studentEmail = $student->email;
+        $paymentLink = 'https://example.com/payment'; 
+
+        Mail::to($studentEmail)->send(new StudentRegistrationConformationMail($firstName, $lastName, $paymentLink));
+
+        return response()->json([
+            'message' => 'Student registered successfully, confirmation email sent.',
+            'data' => $student
+        ], 201);
     }
 
     public function index()
