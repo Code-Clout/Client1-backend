@@ -10,6 +10,7 @@ use App\Http\Controllers\AlumniSpeakController;
 use App\Http\Controllers\DescriptionController;
 use App\Http\Controllers\PlacedStudentController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\QuestionController;
 
 
 
@@ -60,5 +61,11 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::post('/create-announcements', [AnnouncementController::class, 'store']);
     Route::put('/update-announcements/{id}', [AnnouncementController::class, 'update']);
     Route::delete('/delete-announcements/{id}', [AnnouncementController::class, 'destroy']);
+
+    Route::get('/getAll-questions', [QuestionController::class, 'index']);
+    Route::get('/get-question/{id}', [QuestionController::class, 'show']);
+    Route::post('/create-questions', [QuestionController::class, 'store']);
+    Route::put('/update-questions/{id}', [QuestionController::class, 'update']);
+    Route::delete('/delete-questions/{id}', [QuestionController::class, 'destroy']);
     
 });
