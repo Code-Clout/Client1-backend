@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Repositories;
 
 use App\Models\RegistrationStudent;
 use App\Repositories\Interfaces\RegistrationStudentRepositoryInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class RegistrationStudentRepository implements RegistrationStudentRepositoryInterface
 {
@@ -22,4 +22,20 @@ class RegistrationStudentRepository implements RegistrationStudentRepositoryInte
         $student = RegistrationStudent::findOrFail($id);
         return $student->delete();
     }
+
+    public function getById($id)
+    {
+        $student = RegistrationStudent::find($id);
+        if (!$student) {
+            throw new ModelNotFoundException("Student with ID {$id} not found.");
+        }
+        return $student;
+    }
+    
+    public function update(int $id, array $data): bool
+    {
+        $student = $this->getById($id); 
+        return $student->update($data); 
+    }
+
 }

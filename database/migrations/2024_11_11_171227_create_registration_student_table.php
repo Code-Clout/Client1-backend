@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('registration_students', function (Blueprint $table) {
@@ -31,20 +26,16 @@ return new class extends Migration
             $table->string('city')->nullable(); 
             $table->string('pin_code')->nullable(); 
             $table->text('reason')->nullable();
+            $table->string('payment_screenshot')->nullable(); 
+            $table->string('transaction_id')->nullable();  
             $table->boolean('agree_to_terms')->default(false); 
             $table->integer('status')->default(1);
+            $table->boolean('verify')->default(0); 
             $table->timestamps();
             $table->softDeletes();
-
-            
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('registration_students');

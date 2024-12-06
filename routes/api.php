@@ -23,11 +23,12 @@ Route::get('/getAll-alumni-speaks', [AlumniSpeakController::class, 'index']);
 Route::get('/get-placed-students', [PlacedStudentController::class, 'index']);
 Route::get('/get-announcements', [AnnouncementController::class, 'index']);
 
-Route::prefix('students')->group(function () {
-    Route::post('/create', [RegistrationStudentController::class, 'create']);
-    Route::get('/', [RegistrationStudentController::class, 'index']);
-    Route::delete('/{id}', [RegistrationStudentController::class, 'softDelete']);
-});
+//registration student routes
+Route::post('/student-register', [RegistrationStudentController::class, 'create']);
+Route::get('/getAll-register-students', [RegistrationStudentController::class, 'index']);
+Route::delete('/delete-register-student/{id}', [RegistrationStudentController::class, 'softDelete']);
+Route::post('/verify-student/{id}', [RegistrationStudentController::class, 'verifyStudent']);
+
 
 Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     

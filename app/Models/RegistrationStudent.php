@@ -14,6 +14,7 @@ class RegistrationStudent extends Model
         'first_name', 'last_name', 'home_no', 'mobile', 'DOB', 'email', 
         'father_first_name', 'father_last_name', 'mother_first_name', 
         'mother_last_name', 'gender', 'nationality', 'street_address', 
-        'city', 'pin_code', 'reason', 'agree_to_terms', 'status', 'user_id'
+        'city', 'pin_code', 'reason', 'payment_screenshot', 'transaction_id', 
+        'agree_to_terms', 'verify', 'status'
     ];
 }
