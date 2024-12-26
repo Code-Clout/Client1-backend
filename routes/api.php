@@ -25,6 +25,7 @@ Route::get('/get-placed-students', [PlacedStudentController::class, 'index']);
 Route::get('/get-announcements', [AnnouncementController::class, 'index']);
 Route::get('/get-gallery-photos', [GalleryPhotoController::class, 'getAllPhotos']);
 
+
 //registration student routes
 Route::post('/student-register', [RegistrationStudentController::class, 'create']);
 Route::get('/getAll-register-students', [RegistrationStudentController::class, 'index']);
@@ -65,14 +66,19 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::put('/update-announcements/{id}', [AnnouncementController::class, 'update']);
     Route::delete('/delete-announcements/{id}', [AnnouncementController::class, 'destroy']);
 
+    // Test Question APis
     Route::get('/getAll-questions', [QuestionController::class, 'index']);
     Route::get('/get-question/{id}', [QuestionController::class, 'show']);
     Route::post('/create-questions', [QuestionController::class, 'store']);
     Route::put('/update-questions/{id}', [QuestionController::class, 'update']);
     Route::delete('/delete-questions/{id}', [QuestionController::class, 'destroy']);
 
+    // gallary photo apis
     Route::post('/create-gallery-photo', [GalleryPhotoController::class, 'createPhoto']);
     Route::delete('/delete-gallery-photo/{id}', [GalleryPhotoController::class, 'deletePhoto']);
+
+    //dashboard api
+    Route::get('/dashboard-summary', [UserController::class, 'getDashboardSummary']);
     
 });
 

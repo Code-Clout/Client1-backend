@@ -9,6 +9,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\StudentEnquiry;
+use App\Models\RegistrationStudent;
 
 class UserController extends Controller
 {
@@ -73,5 +75,33 @@ class UserController extends Controller
             'user' => $user 
         ]);
     }
+
+    public function getDashboardSummary(): JsonResponse
+    {
+        try {
+            $enquiries = StudentEnquiry::select('id', 'created_at')->get();
+            $totalEnquiries = $enquiries->count();
+            $registeredStudents = RegistrationStudent::select('id', 'created_at')->get();
+            $totalRegisteredStudents = $registeredStudents->count();
+            if ($totalEnquiries === 0 && $totalRegisteredStudents === 0) {
+                return response()->json([
+                    'message' => 'No enquiries or registered students found.'
+                ], 404);
+            }
+            return response()->json([
+                'total_enquiries' => $totalEnquiries,
+                'enquiries' => $enquiries,
+                'total_registered_students' => $totalRegisteredStudents,
+                'registered_students' => $registeredStudents
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred while fetching the dashboard summary.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
     
 }
