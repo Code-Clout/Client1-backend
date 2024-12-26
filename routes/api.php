@@ -23,6 +23,7 @@ Route::get('/getAll-alumni-speaks', [AlumniSpeakController::class, 'index']);
 Route::get('/get-placed-students', [PlacedStudentController::class, 'index']);
 Route::get('/get-announcements', [AnnouncementController::class, 'index']);
 
+
 //registration student routes
 Route::post('/student-register', [RegistrationStudentController::class, 'create']);
 Route::get('/getAll-register-students', [RegistrationStudentController::class, 'index']);
