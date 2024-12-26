@@ -11,6 +11,7 @@ use App\Http\Controllers\DescriptionController;
 use App\Http\Controllers\PlacedStudentController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\GalleryPhotoController;
 
 
 
@@ -22,7 +23,7 @@ Route::get('/getAll-student-testimonials', [StudentTestimonialController::class,
 Route::get('/getAll-alumni-speaks', [AlumniSpeakController::class, 'index']);
 Route::get('/get-placed-students', [PlacedStudentController::class, 'index']);
 Route::get('/get-announcements', [AnnouncementController::class, 'index']);
-
+Route::get('/get-gallery-photos', [GalleryPhotoController::class, 'getAllPhotos']);
 
 //registration student routes
 Route::post('/student-register', [RegistrationStudentController::class, 'create']);
@@ -69,5 +70,11 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::post('/create-questions', [QuestionController::class, 'store']);
     Route::put('/update-questions/{id}', [QuestionController::class, 'update']);
     Route::delete('/delete-questions/{id}', [QuestionController::class, 'destroy']);
+
+    Route::post('/create-gallery-photo', [GalleryPhotoController::class, 'createPhoto']);
+    Route::delete('/delete-gallery-photo/{id}', [GalleryPhotoController::class, 'deletePhoto']);
     
 });
+
+
+
