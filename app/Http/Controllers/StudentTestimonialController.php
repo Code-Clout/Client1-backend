@@ -38,8 +38,8 @@ class StudentTestimonialController extends Controller
     public function store(StoreStudentTestimonialRequest $request)
     {
         $data = $request->validated();
-        $data['student_photo'] = $request->file('student_photo')->store('photos');
-        $data['company_logo'] = $request->file('company_logo')->store('logos');
+        $data['student_photo'] = $request->file('student_photo')->store('public/photos');
+        $data['company_logo'] = $request->file('company_logo')->store('public/logos');
         $this->testimonialRepository->create($data);
         return response()->json(['message' => 'Student testimonial stored successfully!'], 201);
     }
@@ -49,10 +49,10 @@ class StudentTestimonialController extends Controller
         try {
             $data = $request->validated();
             if ($request->hasFile('student_photo')) {
-                $data['student_photo'] = $request->file('student_photo')->store('photos');
+                $data['student_photo'] = $request->file('student_photo')->store('public/photos');
             }
             if ($request->hasFile('company_logo')) {
-                $data['company_logo'] = $request->file('company_logo')->store('logos');
+                $data['company_logo'] = $request->file('company_logo')->store('public/logos');
             }
             $updatedTestimonial = $this->testimonialRepository->update($id, $data);
             return response()->json(['message' => 'Student testimonial updated successfully.', 'data' => $updatedTestimonial], 200);

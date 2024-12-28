@@ -39,8 +39,8 @@ class AlumniSpeakController extends Controller
     public function store(StoreAlumniSpeakRequest $request)
     {
         $data = $request->validated();
-        $data['student_photo'] = $request->file('student_photo')->store('photos');
-        $data['company_logo'] = $request->file('company_logo')->store('logos');
+        $data['student_photo'] = $request->file('student_photo')->store('public/photos');
+        $data['company_logo'] = $request->file('company_logo')->store('public/logos');
 
         $this->repository->create($data);
 
@@ -53,11 +53,11 @@ class AlumniSpeakController extends Controller
             $data = $request->validated();
 
             if ($request->hasFile('student_photo')) {
-                $data['student_photo'] = $request->file('student_photo')->store('photos');
+                $data['student_photo'] = $request->file('student_photo')->store('public/photos');
             }
 
             if ($request->hasFile('company_logo')) {
-                $data['company_logo'] = $request->file('company_logo')->store('logos');
+                $data['company_logo'] = $request->file('company_logo')->store('public/logos');
             }
 
             $alumni = $this->repository->update($id, $data);
