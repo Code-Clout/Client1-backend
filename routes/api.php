@@ -12,6 +12,7 @@ use App\Http\Controllers\PlacedStudentController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\GalleryPhotoController;
+use App\Http\Controllers\PackageController;
 
 
 
@@ -82,5 +83,6 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     
 });
 
+Route::post('/create-package', [PackageController::class, 'update']);
 
 
