@@ -13,6 +13,7 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\GalleryPhotoController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\RecognitionAndApprovalController;
 
 
 
@@ -25,6 +26,7 @@ Route::get('/getAll-alumni-speaks', [AlumniSpeakController::class, 'index']);
 Route::get('/get-placed-students', [PlacedStudentController::class, 'index']);
 Route::get('/get-announcements', [AnnouncementController::class, 'index']);
 Route::get('/get-gallery-photos', [GalleryPhotoController::class, 'getAllPhotos']);
+Route::get('/getAll-recognition-and-approvals', [RecognitionAndApprovalController::class, 'index']);
 
 
 //registration student routes
@@ -84,8 +86,9 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     // Package
     Route::post('/create-package', [PackageController::class, 'update']);
     
+    //recognition-and-approvals
+    Route::get('/get-recognition-and-approvals/{id}', [RecognitionAndApprovalController::class, 'show']);
+    Route::post('/create-recognition-and-approvals', [RecognitionAndApprovalController::class, 'store']);
+    Route::post('/update-recognition-and-approvals/{id}', [RecognitionAndApprovalController::class, 'update']);
+    Route::delete('/delete-recognition-and-approvals/{id}', [RecognitionAndApprovalController::class, 'destroy']);
 });
-
-
-
-
