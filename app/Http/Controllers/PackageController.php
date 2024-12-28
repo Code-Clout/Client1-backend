@@ -38,4 +38,27 @@ class PackageController extends Controller
         }
     }
 
+    public function getAllPackages(): JsonResponse
+    {
+        try {
+            $packages = $this->repository->getAllPackages();
+
+            if ($packages->isEmpty()) {
+                return response()->json([
+                    'message' => 'No packages found.',
+                ], 404);
+            }
+
+            return response()->json([
+                'message' => 'Packages retrieved successfully.',
+                'data' => $packages,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred while retrieving the packages.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 }
