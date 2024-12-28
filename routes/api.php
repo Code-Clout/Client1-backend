@@ -14,6 +14,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\GalleryPhotoController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\RecognitionAndApprovalController;
+use App\Http\Controllers\FeesPaymentStructureController;
 
 
 
@@ -27,7 +28,8 @@ Route::get('/get-placed-students', [PlacedStudentController::class, 'index']);
 Route::get('/get-announcements', [AnnouncementController::class, 'index']);
 Route::get('/get-gallery-photos', [GalleryPhotoController::class, 'getAllPhotos']);
 Route::get('/getAll-recognition-and-approvals', [RecognitionAndApprovalController::class, 'index']);
-
+Route::get('/fees', [FeesPaymentStructureController::class, 'index']);
+Route::get('/getAll-packages', [PackageController::class, 'getAllPackages']);
 
 //registration student routes
 Route::post('/student-register', [RegistrationStudentController::class, 'create']);
@@ -91,4 +93,7 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::post('/create-recognition-and-approvals', [RecognitionAndApprovalController::class, 'store']);
     Route::post('/update-recognition-and-approvals/{id}', [RecognitionAndApprovalController::class, 'update']);
     Route::delete('/delete-recognition-and-approvals/{id}', [RecognitionAndApprovalController::class, 'destroy']);
+
+    //fees
+    Route::post('/create-fees/{id}', [FeesPaymentStructureController::class, 'update']);
 });

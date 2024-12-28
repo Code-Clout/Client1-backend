@@ -18,4 +18,8 @@ class PackageRepository implements PackageRepositoryInterface
         return $package;
     }
     
+    public function getAllPackages()
+    {
+        return Package::all(); 
+    }
 }

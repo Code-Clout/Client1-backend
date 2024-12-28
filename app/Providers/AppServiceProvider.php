@@ -16,6 +16,7 @@ use App\Repositories\QuestionRepository;
 use App\Repositories\GalleryPhotoRepository;
 use App\Repositories\PackageRepository;
 use App\Repositories\RecognitionAndApprovalRepository;
+use App\Repositories\FeesPaymentStructureRepository;
 
 //Interfaces imports
 use App\Repositories\Interfaces\EnquiryRepositoryInterface;
@@ -29,6 +30,7 @@ use App\Repositories\Interfaces\QuestionRepositoryInterface;
 use App\Repositories\Interfaces\GalleryPhotoRepositoryInterface;
 use App\Repositories\Interfaces\PackageRepositoryInterface;
 use App\Repositories\Interfaces\RecognitionAndApprovalRepositoryInterface;
+use App\Repositories\Interfaces\FeesPaymentStructureRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -50,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(GalleryPhotoRepositoryInterface::class, GalleryPhotoRepository::class);
         $this->app->bind(PackageRepositoryInterface::class, PackageRepository::class);
         $this->app->bind(RecognitionAndApprovalRepositoryInterface::class, RecognitionAndApprovalRepository::class);
+        $this->app->bind(FeesPaymentStructureRepositoryInterface::class, FeesPaymentStructureRepository::class);
     }
 
     /**
