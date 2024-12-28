@@ -12,6 +12,7 @@ use App\Http\Controllers\PlacedStudentController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\GalleryPhotoController;
+use App\Http\Controllers\PackageController;
 
 
 
@@ -80,7 +81,11 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     //dashboard api
     Route::get('/dashboard-summary', [UserController::class, 'getDashboardSummary']);
     
+    // Package
+    Route::post('/create-package', [PackageController::class, 'update']);
+    
 });
+
 
 
 

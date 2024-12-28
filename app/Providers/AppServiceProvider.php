@@ -14,6 +14,7 @@ use App\Repositories\PlacedStudentRepository;
 use App\Repositories\AnnouncementRepository;
 use App\Repositories\QuestionRepository;
 use App\Repositories\GalleryPhotoRepository;
+use App\Repositories\PackageRepository;
 
 //Interfaces imports
 use App\Repositories\Interfaces\EnquiryRepositoryInterface;
@@ -25,6 +26,7 @@ use App\Repositories\Interfaces\PlacedStudentRepositoryInterface;
 use App\Repositories\Interfaces\AnnouncementRepositoryInterface;
 use App\Repositories\Interfaces\QuestionRepositoryInterface;
 use App\Repositories\Interfaces\GalleryPhotoRepositoryInterface;
+use App\Repositories\Interfaces\PackageRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -44,6 +46,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AnnouncementRepositoryInterface::class, AnnouncementRepository::class);
         $this->app->bind(QuestionRepositoryInterface::class, QuestionRepository::class);
         $this->app->bind(GalleryPhotoRepositoryInterface::class, GalleryPhotoRepository::class);
+        $this->app->bind(PackageRepositoryInterface::class, PackageRepository::class);
     }
 
     /**
