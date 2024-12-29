@@ -15,6 +15,7 @@ use App\Http\Controllers\GalleryPhotoController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\RecognitionAndApprovalController;
 use App\Http\Controllers\FeesPaymentStructureController;
+use App\Http\Controllers\MetadataController;
 
 
 
@@ -30,6 +31,7 @@ Route::get('/get-gallery-photos', [GalleryPhotoController::class, 'getAllPhotos'
 Route::get('/getAll-recognition-and-approvals', [RecognitionAndApprovalController::class, 'index']);
 Route::get('/fees', [FeesPaymentStructureController::class, 'index']);
 Route::get('/getAll-packages', [PackageController::class, 'getAllPackages']);
+Route::get('/getAll-images', [MetadataController::class, 'getAll']);
 
 //registration student routes
 Route::post('/student-register', [RegistrationStudentController::class, 'create']);
@@ -96,4 +98,9 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
 
     //fees
     Route::post('/create-fees/{id}', [FeesPaymentStructureController::class, 'update']);
+
+    //metadata
+    Route::post('/create-image', [MetadataController::class, 'create']);
+    Route::delete('/delete-image/{id}', [MetadataController::class, 'delete']);
+    
 });
