@@ -8,5 +8,6 @@ interface QuestionRepositoryInterface
     public function create(array $data);
     public function update($id, array $data);
     public function delete($id);
-    public function restore($id); 
+    public function restore($id);
+    public function fetchRandomQuestions($count = 30); 
 }

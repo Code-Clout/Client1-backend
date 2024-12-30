@@ -38,4 +38,10 @@ class QuestionRepository implements QuestionRepositoryInterface
     {
         return Question::withTrashed()->findOrFail($id)->restore();
     }
+
+    public function fetchRandomQuestions($count = 30)
+    {
+        return Question::inRandomOrder()->take($count)->get();
+    }
+
 }

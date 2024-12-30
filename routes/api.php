@@ -104,3 +104,5 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::delete('/delete-image/{id}', [MetadataController::class, 'delete']);
     
 });
+
+Route::get('questions/random', [QuestionController::class, 'fetchRandom']);
