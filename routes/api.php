@@ -106,3 +106,6 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
 });
 
 Route::get('questions/random', [QuestionController::class, 'fetchRandom']);
+Route::post('/submit-answers', [QuestionController::class, 'submitAnswers']);
+Route::get('/student-score/{id}', [QuestionController::class, 'getScore']);
+Route::post('/verify-student', [QuestionController::class, 'verifyStudent']);
