@@ -102,5 +102,10 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     //metadata
     Route::post('/create-image', [MetadataController::class, 'create']);
     Route::delete('/delete-image/{id}', [MetadataController::class, 'delete']);
+
+    Route::get('/questions/random', [QuestionController::class, 'fetchRandom']);
+    Route::post('/submit-score', [QuestionController::class, 'submitScore']);
+    Route::get('/student-score/{id}', [QuestionController::class, 'getScore']);
+    Route::post('/verify-student', [QuestionController::class, 'verifyStudent']);
     
 });
