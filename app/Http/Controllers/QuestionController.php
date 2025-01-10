@@ -79,7 +79,7 @@ class QuestionController extends Controller
 
     public function fetchRandom()
     {
-        $questions = $this->questionRepository->fetchRandomQuestions(30);
+        $questions = $this->questionRepository->fetchRandomQuestions(5);
 
         if ($questions->isEmpty()) {
             return response()->json(['message' => 'No questions found.'], 404);
@@ -89,46 +89,32 @@ class QuestionController extends Controller
     }
 
 
-    public function submitAnswers(Request $request)
-    {
-        $studentId = $request->input('student_id');
-        $answers = $request->input('answers'); 
+    public function submitscore(Request $request)
+{
+    $request->validate([
+        'student_id' => 'required|exists:registration_students,id',
+        'score' => 'required|integer|min:0',
+    ]);
 
-        $correctCount = 0;
-        $totalQuestions = count($answers);
+    try {
+        $student = RegistrationStudent::findOrFail($request->student_id);
 
-        foreach ($answers as $answer) {
-            $question = Question::findOrFail($answer['question_id']);
-            $isCorrect = false;
-
-            foreach ($question->options as $option) {
-                if ($option['option_text'] === $answer['selected_option'] && $option['is_correct']) {
-                    $isCorrect = true;
-                    break;
-                }
-            }
-            StudentAnswer::create([
-                'student_id' => $studentId,
-                'question_id' => $answer['question_id'],
-                'is_correct' => $isCorrect,
-            ]);
-
-            if ($isCorrect) {
-                $correctCount++;
-            }
-        }
-
-        $score = $correctCount;
-        $student = RegistrationStudent::findOrFail($studentId);
-        $student->update(['score' => $score]);
+        $student->score = $request->score;
+        $student->save();
 
         return response()->json([
-            'message' => 'Answers submitted successfully.',
-            'correct_answers' => $correctCount,
-            'total_questions' => $totalQuestions,
-            'score' => $score,
+            'message' => 'Score submitted successfully.',
+            'student_id' => $student->id,
+            'score' => $student->score,
         ], 200);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'An error occurred while submitting the score.',
+            'error' => $e->getMessage(),
+        ], 500);
     }
+}
 
     public function getScore($studentId)
     {
@@ -155,12 +141,18 @@ class QuestionController extends Controller
             'email' => 'required|email',
             'mobile' => 'required|digits:10',
         ]);
-
+    
         $student = RegistrationStudent::where('email', $request->email)
                                       ->where('mobile', $request->mobile)
                                       ->first();
-
+    
         if ($student) {
+            if (!is_null($student->score)) {
+                return response()->json([
+                    'message' => 'This student has already taken the test.',
+                ], 400);
+            }
+    
             return response()->json([
                 'message' => 'Student verified successfully.',
                 'student' => $student,
@@ -171,5 +163,6 @@ class QuestionController extends Controller
             ], 404);
         }
     }
+    
 
 }
