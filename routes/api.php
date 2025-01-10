@@ -16,6 +16,7 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\RecognitionAndApprovalController;
 use App\Http\Controllers\FeesPaymentStructureController;
 use App\Http\Controllers\MetadataController;
+use App\Http\Controllers\TaskController;
 
 
 
@@ -104,6 +105,15 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::delete('/delete-image/{id}', [MetadataController::class, 'delete']);
 
     Route::post('student-enquiries/remark/{id}', [EnquiryController::class, 'addRemark']);
+
+    //Task routes
+    Route::post('/tasks', [TaskController::class, 'assignTask']); 
+    Route::patch('/tasks/{taskId}/status', [TaskController::class, 'updateTaskStatus']); 
+    Route::get('/counsellors/{userId}/tasks', [TaskController::class, 'getTasksForCounsellor']); 
+    Route::get('/tasks/summary', [TaskController::class, 'getTaskSummary']); 
+    Route::get('/counsellors/{userId}/tasks/count', [TaskController::class, 'getTaskCountForCounsellor']);
+    
+
 });
 
 Route::get('/questions/random', [QuestionController::class, 'fetchRandom']);
@@ -112,4 +122,4 @@ Route::get('/student-score/{id}', [QuestionController::class, 'getScore']);
 Route::post('/verify-student', [QuestionController::class, 'verifyStudent']);
 
 
-
+  

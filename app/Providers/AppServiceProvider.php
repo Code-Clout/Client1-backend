@@ -18,6 +18,7 @@ use App\Repositories\PackageRepository;
 use App\Repositories\RecognitionAndApprovalRepository;
 use App\Repositories\FeesPaymentStructureRepository;
 use App\Repositories\MetadataRepository;
+use App\Repositories\TaskRepository;
 
 //Interfaces imports
 use App\Repositories\Interfaces\EnquiryRepositoryInterface;
@@ -33,6 +34,8 @@ use App\Repositories\Interfaces\PackageRepositoryInterface;
 use App\Repositories\Interfaces\RecognitionAndApprovalRepositoryInterface;
 use App\Repositories\Interfaces\FeesPaymentStructureRepositoryInterface;
 use App\Repositories\Interfaces\MetadataRepositoryInterface;
+use App\Repositories\Interfaces\TaskRepositoryInterface;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -56,6 +59,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RecognitionAndApprovalRepositoryInterface::class, RecognitionAndApprovalRepository::class);
         $this->app->bind(FeesPaymentStructureRepositoryInterface::class, FeesPaymentStructureRepository::class);
         $this->app->bind(MetadataRepositoryInterface::class, MetadataRepository::class);
+        $this->app->bind(TaskRepositoryInterface::class, TaskRepository::class);
     }
 
     /**
