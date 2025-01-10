@@ -46,7 +46,7 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::get('/get-all-admin', [UserController::class, 'getAllUsers']);
     Route::post('/create', [UserController::class, 'createUser']);
     Route::get('/get-admin/{id}', [UserController::class, 'getUser']);
-    Route::put('/update-admin/{id}', [UserController::class, 'updateUser']);
+    Route::post('/update-admin/{id}', [UserController::class, 'updateUser']);
     Route::delete('/delete-admin/{id}', [UserController::class, 'deleteUser']);
 
     // student-testimonials
@@ -102,10 +102,14 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     //metadata
     Route::post('/create-image', [MetadataController::class, 'create']);
     Route::delete('/delete-image/{id}', [MetadataController::class, 'delete']);
-   
+
+    Route::post('student-enquiries/remark/{id}', [EnquiryController::class, 'addRemark']);
 });
 
 Route::get('/questions/random', [QuestionController::class, 'fetchRandom']);
 Route::post('/submit-score', [QuestionController::class, 'submitScore']);
 Route::get('/student-score/{id}', [QuestionController::class, 'getScore']);
 Route::post('/verify-student', [QuestionController::class, 'verifyStudent']);
+
+
+

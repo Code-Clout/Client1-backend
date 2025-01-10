@@ -40,13 +40,15 @@ class UserController extends Controller
     }
 
     public function updateUser(UpdateUserRequest $request, int $id): JsonResponse
-    { 
+    {
         $validatedData = $request->validated();
+        \Log::info('Validated Data:', $validatedData);
         $user = $this->userRepository->update($id, $validatedData);
+    
         return $user
             ? response()->json(['message' => 'User updated successfully.', 'data' => $user])
             : response()->json(['message' => 'User not found.'], 404);
-    }
+    }    
 
     public function deleteUser(int $id): JsonResponse
     {

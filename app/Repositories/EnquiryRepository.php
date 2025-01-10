@@ -21,4 +21,13 @@ class EnquiryRepository implements EnquiryRepositoryInterface
             'enquiries' => $enquiries
         ];
     }
+    
+    public function addRemark(int $id, string $remark): StudentEnquiry
+    {
+        $enquiry = StudentEnquiry::findOrFail($id);
+        $enquiry->remark = $remark;
+        $enquiry->save();
+        return $enquiry;
+    }
+
 }

@@ -79,7 +79,7 @@ class QuestionController extends Controller
 
     public function fetchRandom()
     {
-        $questions = $this->questionRepository->fetchRandomQuestions(5);
+        $questions = $this->questionRepository->fetchRandomQuestions(30);
 
         if ($questions->isEmpty()) {
             return response()->json(['message' => 'No questions found.'], 404);

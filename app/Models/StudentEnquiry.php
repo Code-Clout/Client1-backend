@@ -17,5 +17,6 @@ class StudentEnquiry extends Model
         'city',
         'course_interested',
         'more_info',
+        'remark'
     ];
 }

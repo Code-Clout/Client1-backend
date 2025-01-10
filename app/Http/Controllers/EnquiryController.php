@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EnquiryRequest;
 use App\Repositories\Interfaces\EnquiryRepositoryInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class EnquiryController extends Controller
 {
@@ -24,6 +25,7 @@ class EnquiryController extends Controller
             'data' => $enquiry,
         ], 201);
     }
+
     public function getAllEnquiries(): JsonResponse
     {
         $data = $this->enquiryRepository->getAllWithCount();
@@ -33,4 +35,19 @@ class EnquiryController extends Controller
             'enquiries' => $data['enquiries'],
         ], 200);
     }
+
+    public function addRemark(Request $request, int $id): JsonResponse
+    {
+        $request->validate([
+            'remark' => 'required|string',
+        ]);
+
+        $enquiry = $this->enquiryRepository->addRemark($id, $request->input('remark'));
+
+        return response()->json([
+            'message' => 'Remark added successfully.',
+            'data' => $enquiry,
+        ], 200);
+    }
+
 }
