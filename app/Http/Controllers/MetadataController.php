@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMetadataRequest;
 use App\Repositories\Interfaces\MetadataRepositoryInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class MetadataController extends Controller
 {
@@ -50,6 +51,35 @@ class MetadataController extends Controller
                     'message' => 'An error occurred while deleting the metadata.',
                     'error' => $e->getMessage(),
                 ], 500);
+            }
+        }
+
+        public function getImageType(Request $request)
+        {
+            try {
+                // Get `type` from query parameters
+                $type = $request->query('type');
+
+                if (!$type) {
+                    return response()->json(['message' => 'Image type is required'], 400);
+                }
+
+                // Validate if the type is valid
+                $allowedTypes = ['Certificates', 'RecruiterCompanies', 'GalleryPhoto'];
+                if (!in_array($type, $allowedTypes)) {
+                    return response()->json(['message' => 'Invalid image type'], 400);
+                }
+
+                // Fetch images by type using the repository
+                $images = $this->repository->getImagesByType($type);
+
+                if ($images->isEmpty()) {
+                    return response()->json(['message' => 'No images found for this type'], 404);
+                }
+
+                return response()->json(['images' => $images], 200);
+            } catch (\Exception $e) {
+                return response()->json(['message' => 'Something went wrong: ' . $e->getMessage()], 500);
             }
         }
 

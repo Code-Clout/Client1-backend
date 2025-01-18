@@ -21,4 +21,10 @@ class MetadataRepository implements MetadataRepositoryInterface
         $metadata = Metadata::findOrFail($id);
         return $metadata->delete();
     }
+
+    public function getImagesByType(string $type)
+    {
+        return Metadata::where('image_type', $type)->get();
+    }
+
 }

@@ -121,5 +121,6 @@ Route::post('/submit-score', [QuestionController::class, 'submitScore']);
 Route::get('/student-score/{id}', [QuestionController::class, 'getScore']);
 Route::post('/verify-student', [QuestionController::class, 'verifyStudent']);
 
+Route::get('/image-types', [MetadataController::class, 'getImageType']);
 
   
