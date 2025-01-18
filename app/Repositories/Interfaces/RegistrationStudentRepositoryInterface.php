@@ -11,5 +11,5 @@ interface RegistrationStudentRepositoryInterface
     public function softDelete(int $id): bool;
     public function getById($id); 
     public function update(int $id, array $data): bool;
-
+    public function getStudentsWithScore();
 }

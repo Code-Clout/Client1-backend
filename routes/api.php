@@ -40,6 +40,7 @@ Route::get('/getAll-register-students', [RegistrationStudentController::class, '
 Route::delete('/delete-register-student/{id}', [RegistrationStudentController::class, 'softDelete']);
 Route::post('/verify-student/{id}', [RegistrationStudentController::class, 'verifyStudent']);
 
+Route::get('/image-types', [MetadataController::class, 'getImageType']);
 
 Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     
@@ -112,7 +113,7 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::get('/counsellors/{userId}/tasks', [TaskController::class, 'getTasksForCounsellor']); 
     Route::get('/tasks/summary', [TaskController::class, 'getTaskSummary']); 
     Route::get('/counsellors/{userId}/tasks/count', [TaskController::class, 'getTaskCountForCounsellor']);
-    
+    Route::get('/students-with-score', [RegistrationStudentController::class, 'getStudentsWithScore']);
 
 });
 
@@ -120,7 +121,3 @@ Route::get('/questions/random', [QuestionController::class, 'fetchRandom']);
 Route::post('/submit-score', [QuestionController::class, 'submitScore']);
 Route::get('/student-score/{id}', [QuestionController::class, 'getScore']);
 Route::post('/verify-student', [QuestionController::class, 'verifyStudent']);
-
-Route::get('/image-types', [MetadataController::class, 'getImageType']);
-
-  

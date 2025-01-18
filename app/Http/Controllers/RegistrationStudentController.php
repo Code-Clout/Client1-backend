@@ -123,4 +123,22 @@ class RegistrationStudentController extends Controller
             ], 500);
         }
     }
+
+    public function getStudentsWithScore()
+    {
+        try {
+            $students = $this->registrationStudentRepository->getStudentsWithScore();
+
+            if ($students->isEmpty()) {
+                return response()->json(['message' => 'No students with a score found.'], 404);
+            }
+
+            return response()->json(['data' => $students], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred while fetching students with scores.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

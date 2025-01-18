@@ -38,4 +38,8 @@ class RegistrationStudentRepository implements RegistrationStudentRepositoryInte
         return $student->update($data); 
     }
 
+    public function getStudentsWithScore()
+    {
+        return RegistrationStudent::whereNotNull('score')->get();
+    }
 }
