@@ -105,5 +105,14 @@ class UserController extends Controller
         }
     }
     
+    public function getAllCounsullors(){
+       $counsullors = $this->userRepository->getAllCounsullors();
+       if(!$counsullors){
+        return response()->json(["Data Not Found"],404);
+       }
+
+       return response()->json(['data'=> $counsullors]);
+
+    }
     
 }

@@ -121,3 +121,5 @@ Route::get('/questions/random', [QuestionController::class, 'fetchRandom']);
 Route::post('/submit-score', [QuestionController::class, 'submitScore']);
 Route::get('/student-score/{id}', [QuestionController::class, 'getScore']);
 Route::post('/verify-student', [QuestionController::class, 'verifyStudent']);
+
+Route::get('/get-counsellors',[UserController::class,'getAllCounsullors']);

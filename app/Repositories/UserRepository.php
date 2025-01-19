@@ -50,4 +50,9 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::where('email', $email)->first();
     }
+
+    public function getAllCounsullors(): array
+    {
+        return User::where('role_type', 1)->get()->toArray();
+    }
 }
