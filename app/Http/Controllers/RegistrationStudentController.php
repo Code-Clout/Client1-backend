@@ -23,7 +23,22 @@ class RegistrationStudentController extends Controller
     public function create(RegistrationStudentRequest $request)
     {
         try {
-            $student = $this->registrationStudentRepository->create($request->validated());
+            // Handle file upload
+            if ($request->hasFile('payment_screenshot')) {
+                $file = $request->file('payment_screenshot');
+                $filePath = $file->store('payment_screenshots', 'public'); // Save file to the 'storage/app/public/payment_screenshots' directory
+            } else {
+                $filePath = null;
+            }
+
+            // Add file path to request data
+            $data = $request->validated();
+            $data['payment_screenshot'] = $filePath;
+
+            // Save student data
+            $student = $this->registrationStudentRepository->create($data);
+
+            // Send confirmation email
             $firstName = $student->first_name;
             $lastName = $student->last_name;
             $studentEmail = $student->email;
@@ -42,6 +57,7 @@ class RegistrationStudentController extends Controller
             ], 500);
         }
     }
+
 
     public function index()
     {

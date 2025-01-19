@@ -29,7 +29,7 @@ class RegistrationStudentRequest extends FormRequest
             'city' => 'nullable|string|max:255',
             'pin_code' => 'nullable|string|max:10',
             'reason' => 'nullable|string',
-            'payment_screenshot' => 'nullable|string|max:255',
+           'payment_screenshot' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'transaction_id' => 'nullable|string|max:255',
             'agree_to_terms' => 'boolean'
         ];
