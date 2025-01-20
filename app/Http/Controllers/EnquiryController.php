@@ -6,6 +6,8 @@ use App\Http\Requests\EnquiryRequest;
 use App\Repositories\Interfaces\EnquiryRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Mail\EnquiryMail;
+use Illuminate\Support\Facades\Mail;
 
 class EnquiryController extends Controller
 {
@@ -19,7 +21,7 @@ class EnquiryController extends Controller
     public function createEnquiry(EnquiryRequest $request): JsonResponse
     {
         $enquiry = $this->enquiryRepository->create($request->validated());
-
+        Mail::to($enquiry->email_address)->send(new EnquiryMail());
         return response()->json([
             'message' => 'Enquiry created successfully.',
             'data' => $enquiry,
