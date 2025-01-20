@@ -127,3 +127,4 @@ Route::get('/get-counsellors',[UserController::class,'getAllCounsullors']);
 
 Route::patch('/updateEnroll-students/{id}', [RegistrationStudentController::class, 'enrollStudent']);
 Route::get('/students/enrolled', [RegistrationStudentController::class, 'getAllEnrolledStudents']);
+Route::get('/get-verified-students',[RegistrationStudentController:: class, 'getAllverifiedStudents']);

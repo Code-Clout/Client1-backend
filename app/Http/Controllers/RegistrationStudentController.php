@@ -195,4 +195,20 @@ class RegistrationStudentController extends Controller
         }
     }
 
+    public function getAllverifiedStudents(){
+        try {
+            $verifiedStudents =$this->registrationStudentRepository->getAllverifiedStudents();
+
+            if($verifiedStudents->isEmpty()){
+                return response()->json(['message'=>'Data Not Found'],404);
+            }
+            return response()->json(['data'=>$verifiedStudents],200);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred while fetching verified students.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
 }

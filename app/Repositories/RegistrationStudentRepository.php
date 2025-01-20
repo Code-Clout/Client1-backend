@@ -54,4 +54,9 @@ class RegistrationStudentRepository implements RegistrationStudentRepositoryInte
         return RegistrationStudent::where('enrolled_students', 1)->get();
     }
 
+    public function getAllverifiedStudents()
+    {
+        return RegistrationStudent::where('verify',1)->get();
+    }
+
 }

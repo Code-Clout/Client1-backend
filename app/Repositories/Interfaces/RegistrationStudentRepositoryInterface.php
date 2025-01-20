@@ -14,5 +14,6 @@ interface RegistrationStudentRepositoryInterface
     public function getStudentsWithScore();
     public function updateEnrolledStatus(int $id, int $status): bool;
     public function getAllEnrolledStudents();
+    public function getAllverifiedStudents();
 
 }
