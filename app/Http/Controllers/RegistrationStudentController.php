@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StudentRegistrationConformationMail;
 use App\Mail\StudentTestMail;
+use App\Mail\EnrolledStudentsConformationMail;
 
 use Exception;
 
@@ -158,17 +159,32 @@ class RegistrationStudentController extends Controller
     public function enrollStudent($id)
     {
         try {
-            // Always set 'enrolled_students' to 1
+            // Update the enrollment status via the repository
             $updated = $this->registrationStudentRepository->updateEnrolledStatus($id, 1);
-    
+
+            // If the update failed
             if (!$updated) {
                 return response()->json(['message' => 'Unable to enroll the student.'], 400);
             }
-    
-            return response()->json(['message' => 'Student successfully enrolled.'], 200);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Student not found.'], 404);
+
+            // Retrieve the student details
+            $student = $this->registrationStudentRepository->getById($id);
+
+            // If the student doesn't exist
+            if (!$student) {
+                return response()->json(['message' => 'Student not found.'], 404);
+            }
+
+            // Send email confirmation
+            Mail::to($student->email)->send(new EnrolledStudentsConformationMail($student));
+
+            // Return a success response
+            return response()->json([
+                'message' => 'Student successfully enrolled and email sent.',
+                'student' => $student
+            ], 200);
         } catch (Exception $e) {
+            // Handle any exceptions
             return response()->json([
                 'message' => 'An error occurred while enrolling the student.',
                 'error' => $e->getMessage()

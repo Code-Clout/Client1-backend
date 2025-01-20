@@ -23,7 +23,7 @@ class StudentRegistrationConformationMail extends Mailable
 
     public function build()
     {
-        return $this->subject('🎉 Your First Step to Success – Complete Payment & Take the Exam!')
+        return $this->subject('🎉 Your First Step to Success - Registration Sucessful')
                     ->view('Mail.StudentRegistrationConfirmationMail')
                     ->with([
                         'firstName' => $this->firstName,
