@@ -16,9 +16,9 @@ class RegistrationStudentRequest extends FormRequest
         return [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'mobile' => 'required|string|max:15',
+            'mobile' => 'required|string|max:15|unique:registration_students,mobile',
             'DOB' => 'nullable|date',
-            'email' => 'nullable|email|max:255',
+            'email' => 'nullable|email|unique:registration_students,email|max:255',
             'father_first_name' => 'nullable|string|max:255',
             'father_last_name' => 'nullable|string|max:255',
             'mother_first_name' => 'nullable|string|max:255',
