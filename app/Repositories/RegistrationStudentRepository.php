@@ -42,4 +42,16 @@ class RegistrationStudentRepository implements RegistrationStudentRepositoryInte
     {
         return RegistrationStudent::whereNotNull('score')->get();
     }
+
+    public function updateEnrolledStatus(int $id, int $status): bool
+    {
+        $student = $this->getById($id);
+        return $student->update(['enrolled_students' => $status]);
+    }
+
+    public function getAllEnrolledStudents()
+    {
+        return RegistrationStudent::where('enrolled_students', 1)->get();
+    }
+
 }

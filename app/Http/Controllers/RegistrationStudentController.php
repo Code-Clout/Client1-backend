@@ -122,9 +122,6 @@ class RegistrationStudentController extends Controller
     }
     
     
-
-
-
     public function show($id)
     {
         try {
@@ -157,4 +154,45 @@ class RegistrationStudentController extends Controller
             ], 500);
         }
     }
+
+    public function enrollStudent($id)
+    {
+        try {
+            // Always set 'enrolled_students' to 1
+            $updated = $this->registrationStudentRepository->updateEnrolledStatus($id, 1);
+    
+            if (!$updated) {
+                return response()->json(['message' => 'Unable to enroll the student.'], 400);
+            }
+    
+            return response()->json(['message' => 'Student successfully enrolled.'], 200);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Student not found.'], 404);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred while enrolling the student.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
+
+    public function getAllEnrolledStudents()
+    {
+        try {
+            $students = $this->registrationStudentRepository->getAllEnrolledStudents();
+
+            if ($students->isEmpty()) {
+                return response()->json(['message' => 'No enrolled students found.'], 404);
+            }
+
+            return response()->json(['data' => $students], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred while fetching enrolled students.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
 }

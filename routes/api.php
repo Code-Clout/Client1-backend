@@ -123,3 +123,7 @@ Route::get('/student-score/{id}', [QuestionController::class, 'getScore']);
 Route::post('/verify-student', [QuestionController::class, 'verifyStudent']);
 
 Route::get('/get-counsellors',[UserController::class,'getAllCounsullors']);
+
+
+Route::patch('/updateEnroll-students/{id}', [RegistrationStudentController::class, 'enrollStudent']);
+Route::get('/students/enrolled', [RegistrationStudentController::class, 'getAllEnrolledStudents']);
