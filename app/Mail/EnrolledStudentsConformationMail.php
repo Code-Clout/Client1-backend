@@ -19,8 +19,8 @@ class EnrolledStudentsConformationMail extends Mailable
 
     public function build()
     {
-        return $this->subject('🎉 Enrolled Successfully')
-                    ->view('Mail.StudentRegistrationConfirmationMail')
-                    ->with(['student' => $this->student]); // Pass data to the view
+        return $this->subject(' 🎉 Welcome to Finxl Business School – You’re Officially Enrolled!')
+                    ->view('Mail.EnrolledStudentsConformationMail')
+                    ->with(['student' => $this->student]); 
     }
 }
