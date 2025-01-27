@@ -104,9 +104,9 @@ class RegistrationStudentController extends Controller
             $this->registrationStudentRepository->update($id, ['verify' => 1]);
     
             $student = $this->registrationStudentRepository->getById($id);
-    
+            
             // Send the confirmation email
-            Mail::to($student->email)->send(new StudentTestMail($student->first_name, $student->last_name, 'https://example.com/payment'));
+            Mail::to($student->email)->send(new StudentTestMail($student->first_name, $student->last_name, 'fbsedu.in/test'));
     
             return response()->json([
                 'message' => 'Student verified and confirmation email sent.',
