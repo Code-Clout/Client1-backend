@@ -45,7 +45,7 @@
         <div class="content">
             <p>Dear {{ $firstName }} {{ $lastName }},</p>
             <p>Thank you for taking the first step toward an exciting future with Finxl Business School! 🚀</p>
-            <p>We’ve received your registration and payment of ₹200, and we’re thrilled to have you onboard. Our team is currently verifying your details, and we’ll be in touch with you very soon.</p>
+            <p>We’ve received your registration and payment of ₹500, and we’re thrilled to have you onboard. Our team is currently verifying your details, and we’ll be in touch with you very soon.</p>
             <p>As part of the next step, you’ll need to take a small test to assess your eligibility. Don’t worry—it’s just a simple step to ensure you’re on the right track toward success!</p>
             <p>Stay tuned, and get ready to begin this incredible journey with us. If you have any questions, feel free to reach out.</p>
         </div>
